@@ -24,6 +24,7 @@ public class RpcClient {
     public Object sendRequest(RpcRequest rpcRequest, String host, int port) throws IOException {
         Socket socket = new Socket(host, port);
         try {
+            // ?????
             ObjectInputStream objectInputStream = new ObjectInputStream(socket.getInputStream());
             ObjectOutputStream objectOutputStream = new ObjectOutputStream(socket.getOutputStream());
             logger.info("客户端socket输入输出流建立成功");
