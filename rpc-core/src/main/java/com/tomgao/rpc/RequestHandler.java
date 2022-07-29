@@ -1,4 +1,4 @@
-package com.tomgao.rpc.server;
+package com.tomgao.rpc;
 
 import com.tomgao.rpc.entity.RpcRequest;
 import com.tomgao.rpc.entity.RpcResponse;
@@ -6,11 +6,8 @@ import com.tomgao.rpc.enumeration.ResponseCode;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
-import java.net.Socket;
 
 public class RequestHandler {
 

@@ -2,10 +2,12 @@ package com.tomgao.rpc.entity;
 
 import com.tomgao.rpc.enumeration.ResponseCode;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.io.Serializable;
 
 @Data
+@NoArgsConstructor
 public class RpcResponse<T> implements Serializable {
 
     /**

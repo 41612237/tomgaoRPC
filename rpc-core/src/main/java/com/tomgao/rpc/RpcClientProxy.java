@@ -1,7 +1,8 @@
-package com.tomgao.rpc.client;
+package com.tomgao.rpc;
 
+import com.tomgao.rpc.socket.client.SocketClient;
 import com.tomgao.rpc.entity.RpcRequest;
-import com.tomgao.rpc.entity.RpcResponse;
+import lombok.Cleanup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -15,12 +16,11 @@ import java.lang.reflect.Proxy;
 public class RpcClientProxy implements InvocationHandler {
 
     private static final Logger logger = LoggerFactory.getLogger(RpcClientProxy.class);
-    private String host;
-    private int port;
 
-    public RpcClientProxy(String host, int port) {
-        this.host = host;
-        this.port = port;
+    private final RpcClient client;
+
+    public RpcClientProxy(RpcClient client) {
+        this.client = client;
     }
 
     @SuppressWarnings("unchecked")
@@ -32,15 +32,11 @@ public class RpcClientProxy implements InvocationHandler {
     }
 
     @Override
+    // todo Object proxy, Method method, Object[] args 为什么args就是RpcRequest的参数
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
-        logger.info("调用方法: {}#{}", method.getDeclaringClass().getName(), method.getName());
-        RpcRequest rpcRequest = RpcRequest.builder()
-                .interfaceName(method.getDeclaringClass().getName())
-                .methodName(method.getName())
-                .parameters(args)
-                .paramTypes(method.getParameterTypes())
-                .build();
-        RpcClient rpcClient = new RpcClient();
-        return rpcClient.sendRequest(rpcRequest, host, port);
+        logger.info("调用类和方法: {}#{}", method.getDeclaringClass().getName(), method.getName());
+        RpcRequest rpcRequest = new RpcRequest(method.getDeclaringClass().getName(),
+                method.getName(), args, method.getParameterTypes());
+        return client.sendRequest(rpcRequest);
     }
 }

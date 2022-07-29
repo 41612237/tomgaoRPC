@@ -3,7 +3,7 @@ package com.tomgao.test;
 import com.tomgao.rpc.api.HelloService;
 import com.tomgao.rpc.registry.DefaultServiceRegistry;
 import com.tomgao.rpc.registry.ServiceRegistry;
-import com.tomgao.rpc.server.RpcServer;
+import com.tomgao.rpc.socket.server.SocketServer;
 
 public class TestServer {
 
@@ -11,7 +11,7 @@ public class TestServer {
         HelloService helloService = new HelloServiceImpl();
         ServiceRegistry serviceRegistry = new DefaultServiceRegistry();
         serviceRegistry.registry(helloService);
-        RpcServer rpcServer = new RpcServer(serviceRegistry);
-        rpcServer.start(9000);
+        SocketServer socketServer = new SocketServer(serviceRegistry);
+        socketServer.start(9000);
     }
 }
