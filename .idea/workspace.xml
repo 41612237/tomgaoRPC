@@ -4,24 +4,15 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c8e76c79-b28c-4439-b1a0-15d2769dbb38" name="Changes" comment="[v2.0] 使用netty传输数据, 增加了通用的序列化器接口,实现了JSON序列化">
-      <change afterPath="$PROJECT_DIR$/rpc-common/src/main/java/com/tomgao/rpc/exception/SerializeException.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/serializer/KryoSerializer.java" afterDir="false" />
+    <list default="true" id="c8e76c79-b28c-4439-b1a0-15d2769dbb38" name="Changes" comment="[v2.0] 完成了基于Kryo的序列化和反序列化器(用了之后服务端不再有argument mismatch 的错误">
+      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/serializer/HessianSerializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-common/src/main/java/com/tomgao/rpc/RpcException.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-common/src/main/java/com/tomgao/rpc/exception/RpcException.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-common/src/main/java/com/tomgao/rpc/enumeration/SerializerCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-common/src/main/java/com/tomgao/rpc/enumeration/SerializerCode.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/RequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/RequestHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/RpcClientProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/RpcClientProxy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/codec/CommonDecoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/codec/CommonDecoder.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/codec/CommonEncoder.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/codec/CommonEncoder.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/client/NettyClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/client/NettyClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/server/NettyServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/server/NettyServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/registry/DefaultServiceRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/registry/DefaultServiceRegistry.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/serializer/CommonSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/serializer/CommonSerializer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/serializer/JsonSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/serializer/JsonSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/socket/client/SocketClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/socket/client/SocketClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-client/src/main/java/com/tomgao/test/NettyTestClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-client/src/main/java/com/tomgao/test/NettyTestClient.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -144,8 +135,8 @@
     <recent_temporary>
       <list>
         <item itemvalue="Application.NettyTestClient" />
-        <item itemvalue="Application.TestClient" />
         <item itemvalue="Application.NettyTestServer" />
+        <item itemvalue="Application.TestClient" />
         <item itemvalue="Application.TestServer" />
         <item itemvalue="Application.DefaultServiceRegistry" />
       </list>
@@ -159,7 +150,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1658885599932</updated>
-      <workItem from="1658885602053" duration="59770000" />
+      <workItem from="1658885602053" duration="61561000" />
     </task>
     <task id="LOCAL-00001" summary="[v1.0] 实现了基于JDK原生序列化与动态代理的远程调用">
       <created>1658921800433</created>
@@ -182,7 +173,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659074711932</updated>
     </task>
-    <option name="localTasksCounter" value="4" />
+    <task id="LOCAL-00004" summary="[v2.0] 完成了基于Kryo的序列化和反序列化器(用了之后服务端不再有argument mismatch 的错误">
+      <created>1659262640427</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1659262640427</updated>
+    </task>
+    <option name="localTasksCounter" value="5" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -203,16 +201,12 @@
     <MESSAGE value="[v1.0] 实现了基于JDK原生序列化与动态代理的远程调用" />
     <MESSAGE value="[v1.0] 支持多个服务的注册" />
     <MESSAGE value="[v2.0] 使用netty传输数据, 增加了通用的序列化器接口,实现了JSON序列化" />
-    <option name="LAST_COMMIT_MESSAGE" value="[v2.0] 使用netty传输数据, 增加了通用的序列化器接口,实现了JSON序列化" />
+    <MESSAGE value="[v2.0] 完成了基于Kryo的序列化和反序列化器(用了之后服务端不再有argument mismatch 的错误" />
+    <option name="LAST_COMMIT_MESSAGE" value="[v2.0] 完成了基于Kryo的序列化和反序列化器(用了之后服务端不再有argument mismatch 的错误" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/client/NettyClient.java</url>
-          <line>59</line>
-          <option name="timeStamp" value="38" />
-        </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/server/NettyServerHandler.java</url>
           <line>25</line>
@@ -220,7 +214,7 @@
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/client/NettyClient.java</url>
-          <line>65</line>
+          <line>66</line>
           <option name="timeStamp" value="46" />
         </line-breakpoint>
         <line-breakpoint enabled="true" type="java-line">
