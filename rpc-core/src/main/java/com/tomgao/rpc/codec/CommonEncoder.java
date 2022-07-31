@@ -24,6 +24,7 @@ public class CommonEncoder extends MessageToByteEncoder {
     }
 
     @Override
+    //依次写入 魔数, 数据包类型, 序列化方式code, 数据流, 数据流长度
     protected void encode(ChannelHandlerContext channelHandlerContext, Object msg, ByteBuf byteBuf) throws Exception {
         byteBuf.writeInt(MAGIC_NUMBER);
         if (msg instanceof RpcRequest) {

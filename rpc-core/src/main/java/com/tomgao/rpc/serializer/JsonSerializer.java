@@ -47,8 +47,8 @@ public class JsonSerializer implements CommonSerializer {
         for (int i = 0; i < rpcRequest.getParamTypes().length; i++) {
             Class<?> clazz = rpcRequest.getParamTypes()[i];
 
-            //todo isAssignableFrom
-            // todo 为什么先序列化 又反序列化?
+            //todo isAssignableFrom 判定此 Class 对象所表示的类或接口与指定的 Class 参数所表示的类或接口是否相同
+            // todo 为什么先序列化 又反序列化? 可能是检查每个参数和参数类型的顺序是否一致
             if (clazz.isAssignableFrom(rpcRequest.getParameters()[i].getClass())) {
                 byte[] bytes = objectMapper.writeValueAsBytes(rpcRequest.getParameters()[i]);
                 rpcRequest.getParameters()[i] = objectMapper.readValue(bytes, clazz);

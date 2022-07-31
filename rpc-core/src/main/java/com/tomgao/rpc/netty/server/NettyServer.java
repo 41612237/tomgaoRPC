@@ -4,6 +4,7 @@ import com.tomgao.rpc.RpcServer;
 import com.tomgao.rpc.codec.CommonDecoder;
 import com.tomgao.rpc.codec.CommonEncoder;
 import com.tomgao.rpc.serializer.JsonSerializer;
+import com.tomgao.rpc.serializer.KryoSerializer;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
@@ -36,7 +37,7 @@ public class NettyServer implements RpcServer {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             ChannelPipeline pipeline = socketChannel.pipeline();
-                            pipeline.addLast(new CommonEncoder(new JsonSerializer()))
+                            pipeline.addLast(new CommonEncoder(new KryoSerializer()))
                                     .addLast(new CommonDecoder())
                                     .addLast(new NettyServerHandler());
                         }

@@ -1,6 +1,6 @@
 package com.tomgao.rpc.codec;
 
-import com.tomgao.rpc.RpcException;
+import com.tomgao.rpc.exception.RpcException;
 import com.tomgao.rpc.entity.RpcRequest;
 import com.tomgao.rpc.entity.RpcResponse;
 import com.tomgao.rpc.enumeration.PackageType;

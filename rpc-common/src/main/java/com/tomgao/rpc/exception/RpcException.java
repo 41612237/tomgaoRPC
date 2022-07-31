@@ -1,4 +1,4 @@
-package com.tomgao.rpc;
+package com.tomgao.rpc.exception;
 
 import com.tomgao.rpc.enumeration.RpcError;
 

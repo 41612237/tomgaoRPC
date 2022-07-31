@@ -33,6 +33,8 @@ public class RpcClientProxy implements InvocationHandler {
 
     @Override
     // todo Object proxy, Method method, Object[] args 为什么args就是RpcRequest的参数
+    // String res = helloService.hello(object);
+    // 调用这个方法的时候传入的参数,都会被封装到args里面 然后调用代理类的invoke方法 进行方法的增强
     public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
         logger.info("调用类和方法: {}#{}", method.getDeclaringClass().getName(), method.getName());
         RpcRequest rpcRequest = new RpcRequest(method.getDeclaringClass().getName(),

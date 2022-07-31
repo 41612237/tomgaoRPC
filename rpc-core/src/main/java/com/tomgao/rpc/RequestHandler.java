@@ -20,7 +20,7 @@ public class RequestHandler {
             result = invokeTargetMethod(rpcRequest, service);
             logger.info("服务: {} 成功调用方法: {}", rpcRequest.getInterfaceName(), rpcRequest.getMethodName());
         } catch (Exception e) {
-            logger.error("调用或发送时有哦错误发生", e);
+            logger.error("调用或发送时有错误发生", e);
         }
         return result;
     }
@@ -32,6 +32,6 @@ public class RequestHandler {
         } catch (NoSuchMethodException e) {
             return RpcResponse.fail(ResponseCode.METHOD_NOT_FOUND);
         }
-        return method.invoke(service, rpcRequest.getParameters());
+        return method.invoke(service, rpcRequest.getParameters()[0]); // todo argument type mismatch
     }
 }

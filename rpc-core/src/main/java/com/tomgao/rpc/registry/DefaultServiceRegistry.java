@@ -1,6 +1,6 @@
 package com.tomgao.rpc.registry;
 
-import com.tomgao.rpc.RpcException;
+import com.tomgao.rpc.exception.RpcException;
 import com.tomgao.rpc.enumeration.RpcError;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
