@@ -3,6 +3,9 @@ package com.tomgao.rpc.netty.server;
 import com.tomgao.rpc.RpcServer;
 import com.tomgao.rpc.codec.CommonDecoder;
 import com.tomgao.rpc.codec.CommonEncoder;
+import com.tomgao.rpc.enumeration.RpcError;
+import com.tomgao.rpc.exception.RpcException;
+import com.tomgao.rpc.serializer.CommonSerializer;
 import com.tomgao.rpc.serializer.HessianSerializer;
 import com.tomgao.rpc.serializer.JsonSerializer;
 import com.tomgao.rpc.serializer.KryoSerializer;
@@ -21,8 +24,14 @@ public class NettyServer implements RpcServer {
 
     private static final Logger logger = LoggerFactory.getLogger(NettyServer.class);
 
+    private CommonSerializer serializer;
+
     @Override
     public void start(int port) {
+        if (serializer == null) {
+            logger.error("未设置序列化器");
+            throw new RpcException(RpcError.SERVICE_NOT_FOUND);
+        }
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
 
@@ -38,7 +47,7 @@ public class NettyServer implements RpcServer {
                         @Override
                         protected void initChannel(SocketChannel socketChannel) throws Exception {
                             ChannelPipeline pipeline = socketChannel.pipeline();
-                            pipeline.addLast(new CommonEncoder(new HessianSerializer()))
+                            pipeline.addLast(new CommonEncoder(serializer))
                                     .addLast(new CommonDecoder())
                                     .addLast(new NettyServerHandler());
                         }
@@ -52,5 +61,9 @@ public class NettyServer implements RpcServer {
             bossGroup.shutdownGracefully();
             workerGroup.shutdownGracefully();
         }
+    }
+
+    public void setSerializer(CommonSerializer serializer) {
+        this.serializer = serializer;
     }
 }
