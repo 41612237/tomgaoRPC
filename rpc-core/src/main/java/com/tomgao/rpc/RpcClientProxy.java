@@ -9,6 +9,7 @@ import org.slf4j.LoggerFactory;
 import java.lang.reflect.InvocationHandler;
 import java.lang.reflect.Method;
 import java.lang.reflect.Proxy;
+import java.util.UUID;
 
 /**
  * RPC客户端动态代理
@@ -35,9 +36,9 @@ public class RpcClientProxy implements InvocationHandler {
     // todo Object proxy, Method method, Object[] args 为什么args就是RpcRequest的参数
     // String res = helloService.hello(object);
     // 调用这个方法的时候传入的参数,都会被封装到args里面 然后调用代理类的invoke方法 进行方法的增强
-    public Object invoke(Object proxy, Method method, Object[] args) throws Throwable {
+    public Object invoke(Object proxy, Method method, Object[] args) {
         logger.info("调用类和方法: {}#{}", method.getDeclaringClass().getName(), method.getName());
-        RpcRequest rpcRequest = new RpcRequest(method.getDeclaringClass().getName(),
+        RpcRequest rpcRequest = new RpcRequest(UUID.randomUUID().toString(), method.getDeclaringClass().getName(),
                 method.getName(), args, method.getParameterTypes());
         return client.sendRequest(rpcRequest);
     }

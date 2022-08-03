@@ -4,22 +4,19 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c8e76c79-b28c-4439-b1a0-15d2769dbb38" name="Changes" comment="[v2.0] 创建线程池工具类">
-      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/util/ObjectReader.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/util/ObjectWriter.java" afterDir="false" />
+    <list default="true" id="c8e76c79-b28c-4439-b1a0-15d2769dbb38" name="Changes" comment="[v2.0] 统一Netty与传统IO方式的操作接口，Socket方式也可使用多种序列化器(传统方法可以成功调用, 应该就是之前序列化方式除了问题, ObjectInputStream/ObjectOutputStream 直接序列化 可能序列化不出来RpcRequest对象">
+      <change afterPath="$PROJECT_DIR$/rpc-common/src/main/java/com/tomgao/rpc/util/RpcMessageChecker.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-common/src/main/java/com/tomgao/rpc/entity/RpcRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-common/src/main/java/com/tomgao/rpc/entity/RpcRequest.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-common/src/main/java/com/tomgao/rpc/entity/RpcResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-common/src/main/java/com/tomgao/rpc/entity/RpcResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-common/src/main/java/com/tomgao/rpc/enumeration/RpcError.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-common/src/main/java/com/tomgao/rpc/enumeration/RpcError.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/RpcClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/RpcClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/RpcServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/RpcServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/RequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/RequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/RpcClientProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/RpcClientProxy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/client/NettyClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/client/NettyClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/server/NettyServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/server/NettyServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/client/NettyClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/client/NettyClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/server/NettyServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/server/NettyServerHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/socket/client/SocketClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/socket/client/SocketClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/socket/server/RequestHandlerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/socket/server/RequestHandlerThread.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/socket/server/SocketServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/socket/server/SocketServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-client/src/main/java/com/tomgao/test/NettyTestClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-client/src/main/java/com/tomgao/test/NettyTestClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-client/src/main/java/com/tomgao/test/TestClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-client/src/main/java/com/tomgao/test/SocketTestClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-server/src/main/java/com/tomgao/test/NettyTestServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-server/src/main/java/com/tomgao/test/NettyTestServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-server/src/main/java/com/tomgao/test/TestServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-server/src/main/java/com/tomgao/test/SocketTestServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -73,7 +70,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.SocketTestClient">
+  <component name="RunManager" selected="Application.NettyTestClient">
     <configuration name="Dog" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.tomgao.rpc.socket.Dog" />
       <module name="rpc-core" />
@@ -87,12 +84,12 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NettyServerHandler" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.tomgao.rpc.netty.server.NettyServerHandler" />
-      <module name="rpc-core" />
+    <configuration name="NettyTestClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.tomgao.test.NettyTestClient" />
+      <module name="test-client" />
       <extension name="coverage">
         <pattern>
-          <option name="PATTERN" value="com.tomgao.rpc.netty.server.*" />
+          <option name="PATTERN" value="com.tomgao.test.*" />
           <option name="ENABLED" value="true" />
         </pattern>
       </extension>
@@ -100,9 +97,9 @@
         <option name="Make" enabled="true" />
       </method>
     </configuration>
-    <configuration name="NettyTestClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="com.tomgao.test.NettyTestClient" />
-      <module name="test-client" />
+    <configuration name="NettyTestServer" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
+      <option name="MAIN_CLASS_NAME" value="com.tomgao.test.NettyTestServer" />
+      <module name="test-server" />
       <extension name="coverage">
         <pattern>
           <option name="PATTERN" value="com.tomgao.test.*" />
@@ -141,11 +138,11 @@
     </configuration>
     <recent_temporary>
       <list>
+        <item itemvalue="Application.NettyTestClient" />
+        <item itemvalue="Application.NettyTestServer" />
         <item itemvalue="Application.SocketTestClient" />
         <item itemvalue="Application.SocketTestServer" />
         <item itemvalue="Application.Dog" />
-        <item itemvalue="Application.NettyServerHandler" />
-        <item itemvalue="Application.com.tomgao.test.NettyTestClient" />
       </list>
     </recent_temporary>
   </component>
@@ -157,7 +154,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1658885599932</updated>
-      <workItem from="1658885602053" duration="77390000" />
+      <workItem from="1658885602053" duration="82785000" />
     </task>
     <task id="LOCAL-00001" summary="[v1.0] 实现了基于JDK原生序列化与动态代理的远程调用">
       <created>1658921800433</created>
@@ -201,7 +198,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659492549126</updated>
     </task>
-    <option name="localTasksCounter" value="7" />
+    <task id="LOCAL-00007" summary="[v2.0] 统一Netty与传统IO方式的操作接口，Socket方式也可使用多种序列化器(传统方法可以成功调用, 应该就是之前序列化方式除了问题, ObjectInputStream/ObjectOutputStream 直接序列化 可能序列化不出来RpcRequest对象">
+      <created>1659521816659</created>
+      <option name="number" value="00007" />
+      <option name="presentableId" value="LOCAL-00007" />
+      <option name="project" value="LOCAL" />
+      <updated>1659521816661</updated>
+    </task>
+    <option name="localTasksCounter" value="8" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -225,15 +229,16 @@
     <MESSAGE value="[v2.0] 完成了基于Kryo的序列化和反序列化器(用了之后服务端不再有argument mismatch 的错误" />
     <MESSAGE value="[v2.0] 完成了基于Hessian协议的序列化和反序列化器(跟Kryo效果一样,服务端正常, 客户端返回的报空指针" />
     <MESSAGE value="[v2.0] 创建线程池工具类" />
-    <option name="LAST_COMMIT_MESSAGE" value="[v2.0] 创建线程池工具类" />
+    <MESSAGE value="[v2.0] 统一Netty与传统IO方式的操作接口，Socket方式也可使用多种序列化器(传统方法可以成功调用, 应该就是之前序列化方式除了问题, ObjectInputStream/ObjectOutputStream 直接序列化 可能序列化不出来RpcRequest对象" />
+    <option name="LAST_COMMIT_MESSAGE" value="[v2.0] 统一Netty与传统IO方式的操作接口，Socket方式也可使用多种序列化器(传统方法可以成功调用, 应该就是之前序列化方式除了问题, ObjectInputStream/ObjectOutputStream 直接序列化 可能序列化不出来RpcRequest对象" />
   </component>
   <component name="XDebuggerManager">
     <breakpoint-manager>
       <breakpoints>
         <line-breakpoint enabled="true" type="java-line">
           <url>file://$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/client/NettyClient.java</url>
-          <line>78</line>
-          <option name="timeStamp" value="46" />
+          <line>76</line>
+          <option name="timeStamp" value="49" />
         </line-breakpoint>
       </breakpoints>
     </breakpoint-manager>

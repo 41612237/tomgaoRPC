@@ -27,7 +27,7 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<RpcRequest> 
             String interfaceName = rpcRequest.getInterfaceName();
             Object service = serviceRegistry.getService(interfaceName);
             Object result = requestHandler.handle(rpcRequest, service);
-            ChannelFuture future = channelHandlerContext.writeAndFlush(RpcResponse.success(result));
+            ChannelFuture future = channelHandlerContext.writeAndFlush(RpcResponse.success(result, rpcRequest.getRequestId()));
             future.addListener(ChannelFutureListener.CLOSE); // ?
         } finally {
             ReferenceCountUtil.release(rpcRequest);

@@ -7,11 +7,8 @@ import com.tomgao.rpc.entity.RpcRequest;
 import com.tomgao.rpc.entity.RpcResponse;
 import com.tomgao.rpc.enumeration.RpcError;
 import com.tomgao.rpc.exception.RpcException;
-import com.tomgao.rpc.netty.server.NettyServerHandler;
 import com.tomgao.rpc.serializer.CommonSerializer;
-import com.tomgao.rpc.serializer.HessianSerializer;
-import com.tomgao.rpc.serializer.JsonSerializer;
-import com.tomgao.rpc.serializer.KryoSerializer;
+import com.tomgao.rpc.util.RpcMessageChecker;
 import io.netty.bootstrap.Bootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -76,9 +73,10 @@ public class NettyClient implements RpcClient {
                     }
                 });
                 channel.closeFuture().sync();
-                AttributeKey<RpcResponse> key = AttributeKey.valueOf("rpcResponse");
+                // 服务端没有rpcResponse这个key?
+                AttributeKey<RpcResponse> key = AttributeKey.valueOf("rpcResponse" + rpcRequest.getRequestId());
                 RpcResponse rpcResponse = channel.attr(key).get();
-
+                RpcMessageChecker.check(rpcRequest, rpcResponse);
                 return rpcResponse.getData();
             }
         } catch (InterruptedException e) {
