@@ -4,19 +4,13 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c8e76c79-b28c-4439-b1a0-15d2769dbb38" name="Changes" comment="[v2.0] 统一Netty与传统IO方式的操作接口，Socket方式也可使用多种序列化器(传统方法可以成功调用, 应该就是之前序列化方式除了问题, ObjectInputStream/ObjectOutputStream 直接序列化 可能序列化不出来RpcRequest对象">
-      <change afterPath="$PROJECT_DIR$/rpc-common/src/main/java/com/tomgao/rpc/util/RpcMessageChecker.java" afterDir="false" />
+    <list default="true" id="c8e76c79-b28c-4439-b1a0-15d2769dbb38" name="Changes" comment="[v2.0] 为每个请求加上了请求号, 客户端在调用之后会检查响应与请求的请求号是否匹配(补上之前漏掉的客户端readChannel">
+      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/client/ChannelProvider.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-common/src/main/java/com/tomgao/rpc/entity/RpcRequest.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-common/src/main/java/com/tomgao/rpc/entity/RpcRequest.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-common/src/main/java/com/tomgao/rpc/entity/RpcResponse.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-common/src/main/java/com/tomgao/rpc/entity/RpcResponse.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-common/src/main/java/com/tomgao/rpc/enumeration/RpcError.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-common/src/main/java/com/tomgao/rpc/enumeration/RpcError.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/RequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/RequestHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/RpcClientProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/RpcClientProxy.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/client/NettyClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/client/NettyClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/client/NettyClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/client/NettyClientHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/server/NettyServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/server/NettyServerHandler.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/socket/client/SocketClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/socket/client/SocketClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/socket/server/RequestHandlerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/socket/server/RequestHandlerThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/util/ObjectReader.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/util/ObjectReader.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/util/ObjectWriter.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/util/ObjectWriter.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -70,7 +64,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.NettyTestClient">
+  <component name="RunManager" selected="Application.NettyTestServer">
     <configuration name="Dog" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.tomgao.rpc.socket.Dog" />
       <module name="rpc-core" />
@@ -138,8 +132,8 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.NettyTestClient" />
         <item itemvalue="Application.NettyTestServer" />
+        <item itemvalue="Application.NettyTestClient" />
         <item itemvalue="Application.SocketTestClient" />
         <item itemvalue="Application.SocketTestServer" />
         <item itemvalue="Application.Dog" />
@@ -154,7 +148,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1658885599932</updated>
-      <workItem from="1658885602053" duration="82785000" />
+      <workItem from="1658885602053" duration="87602000" />
     </task>
     <task id="LOCAL-00001" summary="[v1.0] 实现了基于JDK原生序列化与动态代理的远程调用">
       <created>1658921800433</created>
@@ -205,7 +199,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659521816661</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="[v2.0] 为每个请求加上了请求号, 客户端在调用之后会检查响应与请求的请求号是否匹配(补上之前漏掉的客户端readChannel">
+      <created>1659527744558</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1659527744558</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -230,17 +231,7 @@
     <MESSAGE value="[v2.0] 完成了基于Hessian协议的序列化和反序列化器(跟Kryo效果一样,服务端正常, 客户端返回的报空指针" />
     <MESSAGE value="[v2.0] 创建线程池工具类" />
     <MESSAGE value="[v2.0] 统一Netty与传统IO方式的操作接口，Socket方式也可使用多种序列化器(传统方法可以成功调用, 应该就是之前序列化方式除了问题, ObjectInputStream/ObjectOutputStream 直接序列化 可能序列化不出来RpcRequest对象" />
-    <option name="LAST_COMMIT_MESSAGE" value="[v2.0] 统一Netty与传统IO方式的操作接口，Socket方式也可使用多种序列化器(传统方法可以成功调用, 应该就是之前序列化方式除了问题, ObjectInputStream/ObjectOutputStream 直接序列化 可能序列化不出来RpcRequest对象" />
-  </component>
-  <component name="XDebuggerManager">
-    <breakpoint-manager>
-      <breakpoints>
-        <line-breakpoint enabled="true" type="java-line">
-          <url>file://$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/client/NettyClient.java</url>
-          <line>76</line>
-          <option name="timeStamp" value="49" />
-        </line-breakpoint>
-      </breakpoints>
-    </breakpoint-manager>
+    <MESSAGE value="[v2.0] 为每个请求加上了请求号, 客户端在调用之后会检查响应与请求的请求号是否匹配(补上之前漏掉的客户端readChannel" />
+    <option name="LAST_COMMIT_MESSAGE" value="[v2.0] 为每个请求加上了请求号, 客户端在调用之后会检查响应与请求的请求号是否匹配(补上之前漏掉的客户端readChannel" />
   </component>
 </project>
