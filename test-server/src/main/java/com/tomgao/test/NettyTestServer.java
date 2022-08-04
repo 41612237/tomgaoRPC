@@ -5,6 +5,7 @@ import com.tomgao.rpc.netty.server.NettyServer;
 import com.tomgao.rpc.registry.DefaultServiceRegistry;
 import com.tomgao.rpc.registry.ServiceRegistry;
 import com.tomgao.rpc.serializer.KryoSerializer;
+import com.tomgao.rpc.serializer.ProtobufSerializer;
 
 import javax.annotation.Resource;
 
@@ -16,7 +17,7 @@ public class NettyTestServer {
         ServiceRegistry registry = new DefaultServiceRegistry();
         registry.registry(helloService);
         NettyServer server = new NettyServer();
-        server.setSerializer(new KryoSerializer());
+        server.setSerializer(new ProtobufSerializer());
         server.start(9999);
     }
 }
