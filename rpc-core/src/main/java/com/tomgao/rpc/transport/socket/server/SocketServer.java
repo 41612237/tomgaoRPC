@@ -45,9 +45,17 @@ public class SocketServer implements RpcServer {
     public SocketServer(ServiceRegistry serviceRegistry) {
         this.serviceRegistry = serviceRegistry;
         threadPool = ThreadPoolFactory.createDefaultThreadPool("socket-rpc-server");
-//        BlockingQueue<Runnable> workingQueue = new ArrayBlockingQueue<>(BLOCKING_QUEUE_CAPACITY);
-//        ThreadFactory threadFactory = Executors.defaultThreadFactory();
-//        threadPool = new ThreadPoolExecutor(CORE_POOL_SIZE, MAXIMUM_POOL_SIZE, KEEP_ALIVE_TIME, TimeUnit.SECONDS, workingQueue, threadFactory);
+    }
+
+    @Override
+    public <T> void publishService(T service, Class<T> serviceClass) {
+        if (serializer == null) {
+            logger.error("未设置序列化器");
+            throw new RpcException(RpcError.SERIALIZER_NOT_FOUND);
+        }
+        serviceProvider.addServiceProvider(service, serviceClass);
+        serviceRegistry.registry(serviceClass.getCanonicalName(), new InetSocketAddress(host, port));
+        start();
     }
 
     @Override
@@ -74,15 +82,6 @@ public class SocketServer implements RpcServer {
         this.serializer =serializer;
     }
 
-    @Override
-    public <T> void publishService(Object service, Class<T> serviceClass) {
-        if (serializer == null) {
-            logger.error("未设置序列化器");
-            throw new RpcException(RpcError.SERIALIZER_NOT_FOUND);
-        }
-        serviceProvider.addServiceProvider(service);
-        serviceRegistry.registry(serviceClass.getCanonicalName(), new InetSocketAddress(host, port));
-        start();
-    }
+
 
 }
