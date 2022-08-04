@@ -1,8 +1,8 @@
-package com.tomgao.rpc.netty.client;
+package com.tomgao.rpc.transport.netty.client;
 
-import com.tomgao.rpc.RpcClient;
-import com.tomgao.rpc.codec.CommonDecoder;
-import com.tomgao.rpc.codec.CommonEncoder;
+import com.tomgao.rpc.registry.NacosServiceRegistry;
+import com.tomgao.rpc.registry.ServiceRegistry;
+import com.tomgao.rpc.transport.RpcClient;
 import com.tomgao.rpc.entity.RpcRequest;
 import com.tomgao.rpc.entity.RpcResponse;
 import com.tomgao.rpc.enumeration.RpcError;
@@ -10,9 +10,10 @@ import com.tomgao.rpc.exception.RpcException;
 import com.tomgao.rpc.serializer.CommonSerializer;
 import com.tomgao.rpc.util.RpcMessageChecker;
 import io.netty.bootstrap.Bootstrap;
-import io.netty.channel.*;
+import io.netty.channel.Channel;
+import io.netty.channel.ChannelOption;
+import io.netty.channel.EventLoopGroup;
 import io.netty.channel.nio.NioEventLoopGroup;
-import io.netty.channel.socket.SocketChannel;
 import io.netty.channel.socket.nio.NioSocketChannel;
 import io.netty.util.AttributeKey;
 import org.slf4j.Logger;
@@ -29,13 +30,10 @@ public class NettyClient implements RpcClient {
 
     private CommonSerializer serializer;
 
-    private String host;
-    private int port;
+    private final ServiceRegistry serviceRegistry;
 
-
-    public NettyClient(String host, int port) {
-        this.host = host;
-        this.port = port;
+    public NettyClient() {
+        this.serviceRegistry = new NacosServiceRegistry();
     }
 
     static {
@@ -56,7 +54,8 @@ public class NettyClient implements RpcClient {
         AtomicReference<Object> result = new AtomicReference<>(null);
 
         try {
-            Channel channel = ChannelProvider.get(new InetSocketAddress(host, port), serializer);
+            InetSocketAddress inetSocketAddress = serviceRegistry.lookupService(rpcRequest.getInterfaceName());
+            Channel channel = ChannelProvider.get(inetSocketAddress, serializer);
             if (channel.isActive()) {
                 channel.writeAndFlush(rpcRequest).addListener(future -> {
                     if (future.isSuccess()) {
@@ -66,7 +65,6 @@ public class NettyClient implements RpcClient {
                     }
                 });
                 channel.closeFuture().sync();
-                // 服务端没有rpcResponse这个key?
                 AttributeKey<RpcResponse> key = AttributeKey.valueOf("rpcResponse" + rpcRequest.getRequestId());
                 RpcResponse rpcResponse = channel.attr(key).get();
                 RpcMessageChecker.check(rpcRequest, rpcResponse);

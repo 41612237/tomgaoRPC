@@ -1,13 +1,10 @@
-package com.tomgao.rpc.netty.client;
+package com.tomgao.rpc.transport.netty.client;
 
 import com.tomgao.rpc.entity.RpcResponse;
-import io.netty.channel.ChannelHandler;
 import io.netty.channel.ChannelHandlerContext;
-import io.netty.channel.ChannelOutboundHandler;
 import io.netty.channel.SimpleChannelInboundHandler;
 import io.netty.util.AttributeKey;
 import io.netty.util.ReferenceCountUtil;
-import io.netty.util.concurrent.EventExecutorGroup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 

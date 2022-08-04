@@ -1,8 +1,8 @@
-package com.tomgao.rpc.socket.server;
+package com.tomgao.rpc.transport.socket.server;
 
-import com.tomgao.rpc.RequestHandler;
 import com.tomgao.rpc.entity.RpcRequest;
 import com.tomgao.rpc.entity.RpcResponse;
+import com.tomgao.rpc.handler.RequestHandler;
 import com.tomgao.rpc.registry.ServiceRegistry;
 import com.tomgao.rpc.serializer.CommonSerializer;
 import com.tomgao.rpc.util.ObjectReader;
@@ -11,8 +11,6 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.InputStream;
-import java.io.ObjectInputStream;
-import java.io.ObjectOutputStream;
 import java.io.OutputStream;
 import java.net.Socket;
 
@@ -39,8 +37,7 @@ public class RequestHandlerThread implements Runnable{
              OutputStream outputStream = socket.getOutputStream()){
             RpcRequest rpcRequest = (RpcRequest) ObjectReader.readObject(inputStream);
             String interfaceName = rpcRequest.getInterfaceName();
-            Object service = serviceRegistry.getService(interfaceName);
-            Object result = requestHandler.handle(rpcRequest, service);
+            Object result = requestHandler.handle(rpcRequest);
             RpcResponse<Object> response = RpcResponse.success(result, rpcRequest.getRequestId());
             ObjectWriter.writeObject(outputStream, response, serializer);
         } catch (Exception e) {

@@ -4,14 +4,30 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c8e76c79-b28c-4439-b1a0-15d2769dbb38" name="Changes" comment="[v2.1] 增加了Netty客户端连接失败重试机制, 改变Socket方式传输数据的端序, 使得能与Netty通信">
-      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/serializer/ProtobufSerializer.java" afterDir="false" />
+    <list default="true" id="c8e76c79-b28c-4439-b1a0-15d2769dbb38" name="Changes" comment="[v3.0] 基于nacos实现服务注册与发现">
+      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/provider/ServiceProvider.java" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/registry/NacosServiceRegistry.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-common/src/main/java/com/tomgao/rpc/enumeration/SerializerCode.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-common/src/main/java/com/tomgao/rpc/enumeration/SerializerCode.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-common/src/main/java/com/tomgao/rpc/enumeration/RpcError.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-common/src/main/java/com/tomgao/rpc/enumeration/RpcError.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-core/pom.xml" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/pom.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/serializer/CommonSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/serializer/CommonSerializer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/RequestHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/handler/RequestHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/RpcClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/RpcClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/RpcClientProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/RpcClientProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/RpcServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/RpcServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/client/ChannelProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/netty/client/ChannelProvider.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/client/NettyClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/netty/client/NettyClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/client/NettyClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/netty/client/NettyClientHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/server/NettyServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/netty/server/NettyServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/netty/server/NettyServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/netty/server/NettyServerHandler.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/registry/DefaultServiceRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/provider/ServiceProviderImpl.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/registry/ServiceRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/registry/ServiceRegistry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/socket/client/SocketClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/socket/client/SocketClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/socket/server/RequestHandlerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/socket/server/RequestHandlerThread.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/socket/server/SocketServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/socket/server/SocketServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test-client/src/main/java/com/tomgao/test/NettyTestClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-client/src/main/java/com/tomgao/test/NettyTestClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-client/src/main/java/com/tomgao/test/SocketTestClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-client/src/main/java/com/tomgao/test/SocketTestClient.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/test-server/src/main/java/com/tomgao/test/NettyTestServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-server/src/main/java/com/tomgao/test/NettyTestServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/test-server/src/main/java/com/tomgao/test/SocketTestServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-server/src/main/java/com/tomgao/test/SocketTestServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -51,7 +67,7 @@
     "project.structure.last.edited": "Modules",
     "project.structure.proportion": "0.15",
     "project.structure.side.proportion": "0.2",
-    "settings.editor.selected.configurable": "editor.preferences.completion"
+    "settings.editor.selected.configurable": "fileTemplates"
   }
 }]]></component>
   <component name="RecentsManager">
@@ -65,7 +81,7 @@
       <recent name="$PROJECT_DIR$" />
     </key>
   </component>
-  <component name="RunManager" selected="Application.NettyTestClient">
+  <component name="RunManager" selected="Application.NettyTestServer">
     <configuration name="NettyTestClient" type="Application" factoryName="Application" temporary="true" nameIsGenerated="true">
       <option name="MAIN_CLASS_NAME" value="com.tomgao.test.NettyTestClient" />
       <module name="test-client" />
@@ -133,11 +149,11 @@
     </configuration>
     <recent_temporary>
       <list>
-        <item itemvalue="Application.NettyTestClient" />
         <item itemvalue="Application.NettyTestServer" />
+        <item itemvalue="Application.SocketTestServer" />
+        <item itemvalue="Application.NettyTestClient" />
         <item itemvalue="Application.Test" />
         <item itemvalue="Application.SocketTestClient" />
-        <item itemvalue="Application.SocketTestServer" />
       </list>
     </recent_temporary>
   </component>
@@ -149,7 +165,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1658885599932</updated>
-      <workItem from="1658885602053" duration="93638000" />
+      <workItem from="1658885602053" duration="106784000" />
     </task>
     <task id="LOCAL-00001" summary="[v1.0] 实现了基于JDK原生序列化与动态代理的远程调用">
       <created>1658921800433</created>
@@ -214,7 +230,28 @@
       <option name="project" value="LOCAL" />
       <updated>1659534704725</updated>
     </task>
-    <option name="localTasksCounter" value="10" />
+    <task id="LOCAL-00010" summary="[v2.1] 新增了基于Protostuff的PortoBuf协议的序列化器">
+      <created>1659581157856</created>
+      <option name="number" value="00010" />
+      <option name="presentableId" value="LOCAL-00010" />
+      <option name="project" value="LOCAL" />
+      <updated>1659581157856</updated>
+    </task>
+    <task id="LOCAL-00011" summary="[v2.2] 修整代码, 使用ThreadPoolFactory创建Socket版本的线程池">
+      <created>1659581490051</created>
+      <option name="number" value="00011" />
+      <option name="presentableId" value="LOCAL-00011" />
+      <option name="project" value="LOCAL" />
+      <updated>1659581490051</updated>
+    </task>
+    <task id="LOCAL-00012" summary="[v3.0] 升级版本3.0提前准备">
+      <created>1659581777567</created>
+      <option name="number" value="00012" />
+      <option name="presentableId" value="LOCAL-00012" />
+      <option name="project" value="LOCAL" />
+      <updated>1659581777567</updated>
+    </task>
+    <option name="localTasksCounter" value="13" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -241,6 +278,13 @@
     <MESSAGE value="[v2.0] 统一Netty与传统IO方式的操作接口，Socket方式也可使用多种序列化器(传统方法可以成功调用, 应该就是之前序列化方式除了问题, ObjectInputStream/ObjectOutputStream 直接序列化 可能序列化不出来RpcRequest对象" />
     <MESSAGE value="[v2.0] 为每个请求加上了请求号, 客户端在调用之后会检查响应与请求的请求号是否匹配(补上之前漏掉的客户端readChannel" />
     <MESSAGE value="[v2.1] 增加了Netty客户端连接失败重试机制, 改变Socket方式传输数据的端序, 使得能与Netty通信" />
-    <option name="LAST_COMMIT_MESSAGE" value="[v2.1] 增加了Netty客户端连接失败重试机制, 改变Socket方式传输数据的端序, 使得能与Netty通信" />
+    <MESSAGE value="[v2.1] 新增了基于Protostuff的PortoBuf协议的序列化器" />
+    <MESSAGE value="[v2.2] 修整代码, 使用ThreadPoolFactory创建Socket版本的线程池" />
+    <MESSAGE value="[v3.0] 升级版本3.0提前准备" />
+    <option name="LAST_COMMIT_MESSAGE" value="[v3.0] 升级版本3.0提前准备" />
+  </component>
+  <component name="XSLT-Support.FileAssociations.UIState">
+    <expand />
+    <select />
   </component>
 </project>

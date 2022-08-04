@@ -1,23 +1,16 @@
 package com.tomgao.test;
 
 import com.tomgao.rpc.api.HelloService;
-import com.tomgao.rpc.netty.server.NettyServer;
-import com.tomgao.rpc.registry.DefaultServiceRegistry;
-import com.tomgao.rpc.registry.ServiceRegistry;
-import com.tomgao.rpc.serializer.KryoSerializer;
 import com.tomgao.rpc.serializer.ProtobufSerializer;
-
-import javax.annotation.Resource;
+import com.tomgao.rpc.transport.netty.server.NettyServer;
 
 public class NettyTestServer {
 
 
     public static void main(String[] args) {
         HelloService helloService = new HelloServiceImpl();
-        ServiceRegistry registry = new DefaultServiceRegistry();
-        registry.registry(helloService);
-        NettyServer server = new NettyServer();
+        NettyServer server = new NettyServer("127.0.0.1", 9999);
         server.setSerializer(new ProtobufSerializer());
-        server.start(9999);
+        server.publishService(helloService, HelloService.class);
     }
 }

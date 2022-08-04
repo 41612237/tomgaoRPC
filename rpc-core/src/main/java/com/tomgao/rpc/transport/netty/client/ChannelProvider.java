@@ -1,4 +1,4 @@
-package com.tomgao.rpc.netty.client;
+package com.tomgao.rpc.transport.netty.client;
 
 import com.tomgao.rpc.codec.CommonDecoder;
 import com.tomgao.rpc.codec.CommonEncoder;

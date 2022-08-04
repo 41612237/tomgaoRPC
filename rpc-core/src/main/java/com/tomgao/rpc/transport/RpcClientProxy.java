@@ -1,8 +1,6 @@
-package com.tomgao.rpc;
+package com.tomgao.rpc.transport;
 
-import com.tomgao.rpc.socket.client.SocketClient;
 import com.tomgao.rpc.entity.RpcRequest;
-import lombok.Cleanup;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -26,6 +24,9 @@ public class RpcClientProxy implements InvocationHandler {
 
     @SuppressWarnings("unchecked")
     /**
+     *
+     * 返回一个代理对象
+     * 调用某个具体方法时, invoke(Object proxy, Method method, Object[] args)
      * @param Class<T> clazz 传入要被代理的接口
      */
     public <T> T getProxy(Class<T> clazz) {
@@ -33,7 +34,7 @@ public class RpcClientProxy implements InvocationHandler {
     }
 
     @Override
-    // todo Object proxy, Method method, Object[] args 为什么args就是RpcRequest的参数
+    // Object proxy, Method method, Object[] args是要调用的method的参数
     // String res = helloService.hello(object);
     // 调用这个方法的时候传入的参数,都会被封装到args里面 然后调用代理类的invoke方法 进行方法的增强
     public Object invoke(Object proxy, Method method, Object[] args) {

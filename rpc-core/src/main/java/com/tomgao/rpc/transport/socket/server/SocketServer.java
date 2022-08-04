@@ -1,7 +1,10 @@
-package com.tomgao.rpc.socket.server;
+package com.tomgao.rpc.transport.socket.server;
 
-import com.tomgao.rpc.RequestHandler;
-import com.tomgao.rpc.RpcServer;
+import com.tomgao.rpc.handler.RequestHandler;
+import com.tomgao.rpc.provider.ServiceProvider;
+import com.tomgao.rpc.provider.ServiceProviderImpl;
+import com.tomgao.rpc.registry.NacosServiceRegistry;
+import com.tomgao.rpc.transport.RpcServer;
 import com.tomgao.rpc.enumeration.RpcError;
 import com.tomgao.rpc.exception.RpcException;
 import com.tomgao.rpc.registry.ServiceRegistry;
@@ -11,6 +14,7 @@ import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
 import java.io.IOException;
+import java.net.InetSocketAddress;
 import java.net.ServerSocket;
 import java.net.Socket;
 import java.util.concurrent.*;
@@ -19,11 +23,22 @@ public class SocketServer implements RpcServer {
 
     private static final Logger logger = LoggerFactory.getLogger(SocketServer.class);
 
-    private CommonSerializer serializer;
-
     private final ExecutorService threadPool;
+    private String host;
+    private int port;
+    private CommonSerializer serializer;
     private RequestHandler requestHandler = new RequestHandler();
     private final ServiceRegistry serviceRegistry;
+    private ServiceProvider serviceProvider;
+
+    public SocketServer(String host, int port) {
+        this.host = host;
+        this.port = port;
+        threadPool = ThreadPoolFactory.createDefaultThreadPool("socket-rpc-server");
+        this.serviceRegistry = new NacosServiceRegistry();
+        this.serviceProvider = new ServiceProviderImpl();
+    }
+
     BlockingQueue<Runnable> workingQueue = new ArrayBlockingQueue<>(100);
     ThreadFactory threadFactory = Executors.defaultThreadFactory();
 
@@ -36,7 +51,7 @@ public class SocketServer implements RpcServer {
     }
 
     @Override
-    public void start(int port) {
+    public void start() {
         if (serializer == null) {
             logger.error("未设置序列化器");
             throw new RpcException(RpcError.UNKNOWN_SERIALIZER);
@@ -57,6 +72,17 @@ public class SocketServer implements RpcServer {
     @Override
     public void setSerializer(CommonSerializer serializer) {
         this.serializer =serializer;
+    }
+
+    @Override
+    public <T> void publishService(Object service, Class<T> serviceClass) {
+        if (serializer == null) {
+            logger.error("未设置序列化器");
+            throw new RpcException(RpcError.SERIALIZER_NOT_FOUND);
+        }
+        serviceProvider.addServiceProvider(service);
+        serviceRegistry.registry(serviceClass.getCanonicalName(), new InetSocketAddress(host, port));
+        start();
     }
 
 }
