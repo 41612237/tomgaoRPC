@@ -1,6 +1,8 @@
 package com.tomgao.rpc.transport.socket.server;
 
+import com.sun.nio.sctp.ShutdownNotification;
 import com.tomgao.rpc.handler.RequestHandler;
+import com.tomgao.rpc.hook.ShutdownHook;
 import com.tomgao.rpc.provider.ServiceProvider;
 import com.tomgao.rpc.provider.ServiceProviderImpl;
 import com.tomgao.rpc.registry.NacosServiceRegistry;
@@ -9,7 +11,7 @@ import com.tomgao.rpc.enumeration.RpcError;
 import com.tomgao.rpc.exception.RpcException;
 import com.tomgao.rpc.registry.ServiceRegistry;
 import com.tomgao.rpc.serializer.CommonSerializer;
-import com.tomgao.rpc.util.ThreadPoolFactory;
+import com.tomgao.rpc.factory.ThreadPoolFactory;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
@@ -65,11 +67,13 @@ public class SocketServer implements RpcServer {
             throw new RpcException(RpcError.UNKNOWN_SERIALIZER);
         }
         try (ServerSocket serverSocket = new ServerSocket(port)) {
+            serverSocket.bind(new InetSocketAddress(host, port));
             logger.info("服务器启动");
+            ShutdownHook.getShutdownHook().addClearAllHook();
             Socket socket;
             while ((socket = serverSocket.accept()) != null) {
                 logger.info("消费者连接IP: {} : {}", socket.getInetAddress(), socket.getPort());
-                threadPool.execute(new RequestHandlerThread(socket, requestHandler, serviceRegistry, serializer));
+                threadPool.execute(new SocketRequestHandlerThread(socket, requestHandler, serializer));
             }
             threadPool.shutdown();
         } catch (IOException e) {

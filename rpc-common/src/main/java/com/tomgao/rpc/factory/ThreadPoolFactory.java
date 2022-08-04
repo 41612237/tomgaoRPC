@@ -1,4 +1,4 @@
-package com.tomgao.rpc.util;
+package com.tomgao.rpc.factory;
 
 import com.google.common.util.concurrent.ThreadFactoryBuilder;
 

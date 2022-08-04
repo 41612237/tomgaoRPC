@@ -1,5 +1,6 @@
 package com.tomgao.rpc.transport.netty.server;
 
+import com.tomgao.rpc.hook.ShutdownHook;
 import com.tomgao.rpc.provider.ServiceProvider;
 import com.tomgao.rpc.provider.ServiceProviderImpl;
 import com.tomgao.rpc.registry.NacosServiceRegistry;
@@ -80,6 +81,7 @@ public class NettyServer implements RpcServer {
                     });
 
             ChannelFuture future = serverBootstrap.bind(host, port).sync();
+            ShutdownHook.getShutdownHook().addClearAllHook();
             future.channel().closeFuture().sync(); // ?
         } catch (InterruptedException e) {
             logger.info("启动服务器异常...", e);

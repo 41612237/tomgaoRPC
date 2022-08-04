@@ -1,11 +1,10 @@
 package com.tomgao.rpc.transport.netty.server;
 
+import com.tomgao.rpc.factory.SingletonFactory;
 import com.tomgao.rpc.handler.RequestHandler;
 import com.tomgao.rpc.entity.RpcRequest;
 import com.tomgao.rpc.entity.RpcResponse;
-import com.tomgao.rpc.provider.ServiceProviderImpl;
-import com.tomgao.rpc.registry.ServiceRegistry;
-import com.tomgao.rpc.util.ThreadPoolFactory;
+import com.tomgao.rpc.factory.ThreadPoolFactory;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
@@ -19,14 +18,14 @@ import java.util.concurrent.ExecutorService;
 public class NettyServerHandler extends SimpleChannelInboundHandler<RpcRequest> {
 
     private static final Logger logger = LoggerFactory.getLogger(NettyServerHandler.class);
-    private static RequestHandler requestHandler;
-
     private static final String THREAD_NAME_PREFIX = "netty-server-handler";
-    private static final ExecutorService threadPool;
+    private final ExecutorService threadPool;
 
-    static {
-        requestHandler = new RequestHandler();
-        threadPool = ThreadPoolFactory.createDefaultThreadPool(THREAD_NAME_PREFIX);
+    private final RequestHandler requestHandler;
+
+    public NettyServerHandler() {
+        this.requestHandler = SingletonFactory.getInstance(RequestHandler.class);
+        this.threadPool = ThreadPoolFactory.createDefaultThreadPool(THREAD_NAME_PREFIX);
     }
 
     @Override
