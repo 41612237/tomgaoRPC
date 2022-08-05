@@ -28,17 +28,22 @@ public class SocketServer implements RpcServer {
     private final ExecutorService threadPool;
     private String host;
     private int port;
-    private CommonSerializer serializer;
-    private RequestHandler requestHandler = new RequestHandler();
+    private final CommonSerializer serializer = CommonSerializer.getByCode(DEFAULT_SERIALIZER);
+    private final RequestHandler requestHandler = new RequestHandler();
     private final ServiceRegistry serviceRegistry;
     private ServiceProvider serviceProvider;
 
     public SocketServer(String host, int port) {
+        this(host, port, DEFAULT_SERIALIZER);
+    }
+
+    public SocketServer(String host, int port, Integer serializer) {
         this.host = host;
         this.port = port;
         threadPool = ThreadPoolFactory.createDefaultThreadPool("socket-rpc-server");
         this.serviceRegistry = new NacosServiceRegistry();
         this.serviceProvider = new ServiceProviderImpl();
+//        this.serializer = CommonSerializer.getByCode(serializer);
     }
 
     BlockingQueue<Runnable> workingQueue = new ArrayBlockingQueue<>(100);
@@ -80,12 +85,5 @@ public class SocketServer implements RpcServer {
             logger.error("连接时有错误发生..", e);
         }
     }
-
-    @Override
-    public void setSerializer(CommonSerializer serializer) {
-        this.serializer =serializer;
-    }
-
-
 
 }
