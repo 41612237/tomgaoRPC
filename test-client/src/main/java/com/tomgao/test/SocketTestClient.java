@@ -1,10 +1,9 @@
 package com.tomgao.test;
 
-import com.tomgao.rpc.serializer.CommonSerializer;
-import com.tomgao.rpc.transport.RpcClientProxy;
 import com.tomgao.rpc.api.HelloObject;
 import com.tomgao.rpc.api.HelloService;
-import com.tomgao.rpc.serializer.KryoSerializer;
+import com.tomgao.rpc.serializer.CommonSerializer;
+import com.tomgao.rpc.transport.RpcClientProxy;
 import com.tomgao.rpc.transport.socket.client.SocketClient;
 
 public class SocketTestClient {

@@ -2,7 +2,6 @@ package com.tomgao.test;
 
 import com.tomgao.rpc.api.HelloService;
 import com.tomgao.rpc.serializer.CommonSerializer;
-import com.tomgao.rpc.serializer.ProtobufSerializer;
 import com.tomgao.rpc.transport.netty.server.NettyServer;
 
 public class NettyTestServer {

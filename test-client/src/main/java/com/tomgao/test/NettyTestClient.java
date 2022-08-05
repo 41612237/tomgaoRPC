@@ -1,12 +1,11 @@
 package com.tomgao.test;
 
+import com.tomgao.rpc.api.HelloObject;
+import com.tomgao.rpc.api.HelloService;
 import com.tomgao.rpc.serializer.CommonSerializer;
 import com.tomgao.rpc.transport.RpcClient;
 import com.tomgao.rpc.transport.RpcClientProxy;
-import com.tomgao.rpc.api.HelloObject;
-import com.tomgao.rpc.api.HelloService;
 import com.tomgao.rpc.transport.netty.client.NettyClient;
-import com.tomgao.rpc.serializer.ProtobufSerializer;
 
 public class NettyTestClient {
 
