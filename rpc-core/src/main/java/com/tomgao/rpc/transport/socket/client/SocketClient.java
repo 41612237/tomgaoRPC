@@ -5,6 +5,8 @@ import com.tomgao.rpc.entity.RpcResponse;
 import com.tomgao.rpc.enumeration.ResponseCode;
 import com.tomgao.rpc.enumeration.RpcError;
 import com.tomgao.rpc.exception.RpcException;
+import com.tomgao.rpc.loadbalancer.LoadBalancer;
+import com.tomgao.rpc.loadbalancer.RandomLoadBalancer;
 import com.tomgao.rpc.registry.NacosServiceDiscovery;
 import com.tomgao.rpc.registry.ServiceDiscovery;
 import com.tomgao.rpc.serializer.CommonSerializer;
@@ -33,11 +35,19 @@ public class SocketClient implements RpcClient {
     private final CommonSerializer serializer;
 
     public SocketClient() {
-        this(DEFAULT_SERIALIZER);
+        this(DEFAULT_SERIALIZER, new RandomLoadBalancer());
+    }
+
+    public SocketClient(LoadBalancer loadBalancer) {
+        this(DEFAULT_SERIALIZER, loadBalancer);
     }
 
     public SocketClient(Integer serializer) {
-        this.serviceDiscovery = new NacosServiceDiscovery();
+        this(serializer, new RandomLoadBalancer());
+    }
+
+    public SocketClient(Integer serializer, LoadBalancer loadBalancer) {
+        this.serviceDiscovery = new NacosServiceDiscovery(loadBalancer);
         this.serializer = CommonSerializer.getByCode(serializer);
     }
 
