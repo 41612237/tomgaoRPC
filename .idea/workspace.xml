@@ -4,21 +4,22 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c8e76c79-b28c-4439-b1a0-15d2769dbb38" name="Changes" comment="[v3.0] 优化代码, 增加了关闭服务器后自动向nacos注销的钩子">
+    <list default="true" id="c8e76c79-b28c-4439-b1a0-15d2769dbb38" name="Changes" comment="[v3.0] 增加心跳检查(暂时无效, 因为客户端完成一个调用后会立刻关闭连接)">
+      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/netty/client/UnprocessedRequests.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-common/src/main/java/com/tomgao/rpc/factory/ThreadPoolFactory.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-common/src/main/java/com/tomgao/rpc/factory/ThreadPoolFactory.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/hook/ShutdownHook.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/hook/ShutdownHook.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/serializer/CommonSerializer.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/serializer/CommonSerializer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/RpcClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/RpcClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/RpcServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/RpcServer.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/registry/NacosServiceDiscovery.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/registry/NacosServiceDiscovery.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/registry/NacosServiceRegistry.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/registry/NacosServiceRegistry.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/RpcClientProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/RpcClientProxy.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/netty/client/ChannelProvider.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/netty/client/ChannelProvider.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/netty/client/NettyClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/netty/client/NettyClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/netty/client/NettyClientHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/netty/client/NettyClientHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/netty/server/NettyServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/netty/server/NettyServer.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/netty/server/NettyServerHandler.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/netty/server/NettyServerHandler.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/socket/client/SocketClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/socket/client/SocketClient.java" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/socket/server/SocketRequestHandlerThread.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/socket/server/SocketRequestHandlerThread.java" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/socket/server/SocketServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/socket/server/SocketServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-client/src/main/java/com/tomgao/test/NettyTestClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-client/src/main/java/com/tomgao/test/NettyTestClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-client/src/main/java/com/tomgao/test/SocketTestClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-client/src/main/java/com/tomgao/test/SocketTestClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-server/src/main/java/com/tomgao/test/NettyTestServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-server/src/main/java/com/tomgao/test/NettyTestServer.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-server/src/main/java/com/tomgao/test/SocketTestServer.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-server/src/main/java/com/tomgao/test/SocketTestServer.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -156,7 +157,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1658885599932</updated>
-      <workItem from="1658885602053" duration="119710000" />
+      <workItem from="1658885602053" duration="126706000" />
     </task>
     <task id="LOCAL-00001" summary="[v1.0] 实现了基于JDK原生序列化与动态代理的远程调用">
       <created>1658921800433</created>
@@ -263,7 +264,21 @@
       <option name="project" value="LOCAL" />
       <updated>1659617002452</updated>
     </task>
-    <option name="localTasksCounter" value="16" />
+    <task id="LOCAL-00016" summary="[v3.0] 优化线程池, 优化序列化器的创建方式">
+      <created>1659703655974</created>
+      <option name="number" value="00016" />
+      <option name="presentableId" value="LOCAL-00016" />
+      <option name="project" value="LOCAL" />
+      <updated>1659703655974</updated>
+    </task>
+    <task id="LOCAL-00017" summary="[v3.0] 增加心跳检查(暂时无效, 因为客户端完成一个调用后会立刻关闭连接)">
+      <created>1659706025004</created>
+      <option name="number" value="00017" />
+      <option name="presentableId" value="LOCAL-00017" />
+      <option name="project" value="LOCAL" />
+      <updated>1659706025004</updated>
+    </task>
+    <option name="localTasksCounter" value="18" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -296,7 +311,9 @@
     <MESSAGE value="[v3.0] 基于nacos实现服务注册与发现" />
     <MESSAGE value="[v3.0] 抽象出SeviceDiscovery接口" />
     <MESSAGE value="[v3.0] 优化代码, 增加了关闭服务器后自动向nacos注销的钩子" />
-    <option name="LAST_COMMIT_MESSAGE" value="[v3.0] 优化代码, 增加了关闭服务器后自动向nacos注销的钩子" />
+    <MESSAGE value="[v3.0] 优化线程池, 优化序列化器的创建方式" />
+    <MESSAGE value="[v3.0] 增加心跳检查(暂时无效, 因为客户端完成一个调用后会立刻关闭连接)" />
+    <option name="LAST_COMMIT_MESSAGE" value="[v3.0] 增加心跳检查(暂时无效, 因为客户端完成一个调用后会立刻关闭连接)" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>

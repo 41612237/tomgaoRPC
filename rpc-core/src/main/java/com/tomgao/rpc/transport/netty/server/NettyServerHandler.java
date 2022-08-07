@@ -1,10 +1,9 @@
 package com.tomgao.rpc.transport.netty.server;
 
-import com.tomgao.rpc.factory.SingletonFactory;
-import com.tomgao.rpc.handler.RequestHandler;
 import com.tomgao.rpc.entity.RpcRequest;
 import com.tomgao.rpc.entity.RpcResponse;
-import com.tomgao.rpc.factory.ThreadPoolFactory;
+import com.tomgao.rpc.factory.SingletonFactory;
+import com.tomgao.rpc.handler.RequestHandler;
 import io.netty.channel.ChannelFuture;
 import io.netty.channel.ChannelFutureListener;
 import io.netty.channel.ChannelHandlerContext;
@@ -14,8 +13,6 @@ import io.netty.handler.timeout.IdleStateEvent;
 import io.netty.util.ReferenceCountUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
-
-import java.util.concurrent.ExecutorService;
 
 public class NettyServerHandler extends SimpleChannelInboundHandler<RpcRequest> {
 
@@ -37,8 +34,11 @@ public class NettyServerHandler extends SimpleChannelInboundHandler<RpcRequest> 
             }
             logger.info("接收到客户端请求...");
             Object result = requestHandler.handle(rpcRequest);
-            ChannelFuture future = channelHandlerContext.writeAndFlush(RpcResponse.success(result, rpcRequest.getRequestId()));
-            future.addListener(ChannelFutureListener.CLOSE_ON_FAILURE);
+            if (channelHandlerContext.channel().isActive() && channelHandlerContext.channel().isWritable()){
+                channelHandlerContext.writeAndFlush(RpcResponse.success(result, rpcRequest.getRequestId()));
+            } else {
+                logger.error("channel不可写");
+            }
         } finally {
             ReferenceCountUtil.release(rpcRequest);
         }

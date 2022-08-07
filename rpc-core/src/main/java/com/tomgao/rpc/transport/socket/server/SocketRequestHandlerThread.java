@@ -3,7 +3,6 @@ package com.tomgao.rpc.transport.socket.server;
 import com.tomgao.rpc.entity.RpcRequest;
 import com.tomgao.rpc.entity.RpcResponse;
 import com.tomgao.rpc.handler.RequestHandler;
-import com.tomgao.rpc.registry.ServiceRegistry;
 import com.tomgao.rpc.serializer.CommonSerializer;
 import com.tomgao.rpc.util.ObjectReader;
 import com.tomgao.rpc.util.ObjectWriter;

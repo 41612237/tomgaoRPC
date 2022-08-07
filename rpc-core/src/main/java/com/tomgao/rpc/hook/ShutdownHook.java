@@ -5,9 +5,6 @@ import com.tomgao.rpc.util.NacosUtil;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.util.concurrent.ExecutorService;
-import java.util.concurrent.ThreadFactory;
-
 /**
  * @author： tomgao
  * @date： 2022-08-04 21:07
@@ -17,8 +14,6 @@ import java.util.concurrent.ThreadFactory;
 public class ShutdownHook {
 
     private static final Logger logger = LoggerFactory.getLogger(ShutdownHook.class);
-
-    private final ExecutorService threadPool = ThreadPoolFactory.createDefaultThreadPool("shutdown");
 
     private static final ShutdownHook shutdownHook = new ShutdownHook();
 
@@ -30,7 +25,7 @@ public class ShutdownHook {
         logger.info("关闭后将自动注销所有服务");
         Runtime.getRuntime().addShutdownHook(new Thread(() -> {
             NacosUtil.clearRegistry();
-            threadPool.shutdown();
+            ThreadPoolFactory.shutDownAll();
         }));
     }
 }

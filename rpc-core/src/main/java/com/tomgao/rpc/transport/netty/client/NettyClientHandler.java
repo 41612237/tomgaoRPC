@@ -2,6 +2,7 @@ package com.tomgao.rpc.transport.netty.client;
 
 import com.tomgao.rpc.entity.RpcRequest;
 import com.tomgao.rpc.entity.RpcResponse;
+import com.tomgao.rpc.factory.SingletonFactory;
 import com.tomgao.rpc.serializer.CommonSerializer;
 import io.netty.channel.Channel;
 import io.netty.channel.ChannelFutureListener;
@@ -20,13 +21,17 @@ public class NettyClientHandler extends SimpleChannelInboundHandler<RpcResponse>
 
     private static final Logger logger = LoggerFactory.getLogger(NettyClientHandler.class);
 
+    private final UnprocessedRequests unprocessedRequests;
+
+    public NettyClientHandler() {
+        this.unprocessedRequests = SingletonFactory.getInstance(UnprocessedRequests.class);
+    }
+
     @Override
     protected void channelRead0(ChannelHandlerContext channelHandlerContext, RpcResponse rpcResponse) throws Exception {
         try {
             logger.info("客户端接收到消息:{}", rpcResponse);
-            AttributeKey<RpcResponse> key = AttributeKey.valueOf("rpcResponse" + rpcResponse.getRequestId());
-            channelHandlerContext.channel().attr(key).set(rpcResponse);
-            channelHandlerContext.channel().close();
+            unprocessedRequests.complete(rpcResponse);
         } finally {
             ReferenceCountUtil.release(rpcResponse);
         }
