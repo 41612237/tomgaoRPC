@@ -4,16 +4,9 @@
     <option name="autoReloadType" value="SELECTIVE" />
   </component>
   <component name="ChangeListManager">
-    <list default="true" id="c8e76c79-b28c-4439-b1a0-15d2769dbb38" name="Changes" comment="[v3.0] Netty客户端使用CompletableFuture接收返回结果, 优化Netty客户端连接逻辑">
-      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/loadbalancer/LoadBalancer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/loadbalancer/RandomLoadBalancer.java" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/loadbalancer/RoundRobinLoadBalancer.java" afterDir="false" />
+    <list default="true" id="c8e76c79-b28c-4439-b1a0-15d2769dbb38" name="Changes" comment="[v3.0] 新增了负载均衡接口, 并实现了随机和轮询负载均衡">
+      <change afterPath="$PROJECT_DIR$/docs/README.md" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/registry/NacosServiceDiscovery.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/registry/NacosServiceDiscovery.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/RpcClientProxy.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/RpcClientProxy.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/netty/client/NettyClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/netty/client/NettyClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/socket/client/SocketClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/rpc-core/src/main/java/com/tomgao/rpc/transport/socket/client/SocketClient.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/test-client/src/main/java/com/tomgao/test/SocketTestClient.java" beforeDir="false" afterPath="$PROJECT_DIR$/test-client/src/main/java/com/tomgao/test/SocketTestClient.java" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -151,7 +144,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1658885599932</updated>
-      <workItem from="1658885602053" duration="129209000" />
+      <workItem from="1658885602053" duration="130065000" />
     </task>
     <task id="LOCAL-00001" summary="[v1.0] 实现了基于JDK原生序列化与动态代理的远程调用">
       <created>1658921800433</created>
@@ -279,7 +272,14 @@
       <option name="project" value="LOCAL" />
       <updated>1659842328213</updated>
     </task>
-    <option name="localTasksCounter" value="19" />
+    <task id="LOCAL-00019" summary="[v3.0] 新增了负载均衡接口, 并实现了随机和轮询负载均衡">
+      <created>1659866843094</created>
+      <option name="number" value="00019" />
+      <option name="presentableId" value="LOCAL-00019" />
+      <option name="project" value="LOCAL" />
+      <updated>1659866843094</updated>
+    </task>
+    <option name="localTasksCounter" value="20" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -315,7 +315,8 @@
     <MESSAGE value="[v3.0] 优化线程池, 优化序列化器的创建方式" />
     <MESSAGE value="[v3.0] 增加心跳检查(暂时无效, 因为客户端完成一个调用后会立刻关闭连接)" />
     <MESSAGE value="[v3.0] Netty客户端使用CompletableFuture接收返回结果, 优化Netty客户端连接逻辑" />
-    <option name="LAST_COMMIT_MESSAGE" value="[v3.0] Netty客户端使用CompletableFuture接收返回结果, 优化Netty客户端连接逻辑" />
+    <MESSAGE value="[v3.0] 新增了负载均衡接口, 并实现了随机和轮询负载均衡" />
+    <option name="LAST_COMMIT_MESSAGE" value="[v3.0] 新增了负载均衡接口, 并实现了随机和轮询负载均衡" />
   </component>
   <component name="XDebuggerManager">
     <watches-manager>
@@ -327,5 +328,10 @@
   <component name="XSLT-Support.FileAssociations.UIState">
     <expand />
     <select />
+  </component>
+  <component name="com.intellij.coverage.CoverageDataManagerImpl">
+    <SUITE FILE_PATH="coverage/TGrpc$SocketTestServer.ic" NAME="SocketTestServer Coverage Results" MODIFIED="1659866427174" SOURCE_PROVIDER="com.intellij.coverage.DefaultCoverageFileProvider" RUNNER="idea" COVERAGE_BY_TEST_ENABLED="false" COVERAGE_TRACING_ENABLED="false">
+      <FILTER>com.tomgao.test.*</FILTER>
+    </SUITE>
   </component>
 </project>
