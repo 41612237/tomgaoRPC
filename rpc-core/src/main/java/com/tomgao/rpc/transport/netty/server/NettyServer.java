@@ -10,7 +10,7 @@ import com.tomgao.rpc.provider.ServiceProviderImpl;
 import com.tomgao.rpc.registry.NacosServiceRegistry;
 import com.tomgao.rpc.registry.ServiceRegistry;
 import com.tomgao.rpc.serializer.CommonSerializer;
-import com.tomgao.rpc.transport.RpcServer;
+import com.tomgao.rpc.transport.AbstractRpcServer;
 import io.netty.bootstrap.ServerBootstrap;
 import io.netty.channel.*;
 import io.netty.channel.nio.NioEventLoopGroup;
@@ -22,18 +22,13 @@ import io.netty.handler.timeout.IdleStateHandler;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
-import java.net.InetSocketAddress;
 import java.util.concurrent.TimeUnit;
 
-public class NettyServer implements RpcServer {
+/**
+ * NIO方式服务提供侧
+ */
+public class NettyServer extends AbstractRpcServer {
 
-    private static final Logger logger = LoggerFactory.getLogger(NettyServer.class);
-
-    private final String host;
-    private final int port;
-
-    private final ServiceRegistry serviceRegistry;
-    private final ServiceProvider serviceProvider;
     private final CommonSerializer serializer;
 
     public NettyServer(String host, int port) {
@@ -44,28 +39,13 @@ public class NettyServer implements RpcServer {
         this.port = port;
         serviceRegistry = new NacosServiceRegistry();
         serviceProvider = new ServiceProviderImpl();
-        this.serializer = CommonSerializer.getByCode(DEFAULT_SERIALIZER);
-    }
-
-    @Override
-    public <T> void publishService(T service, Class<T> serviceClass) {
-        if (serializer == null) {
-            logger.error("未设置序列化器");
-            throw new RpcException(RpcError.SERIALIZER_NOT_FOUND);
-        }
-
-        serviceProvider.addServiceProvider(service, serviceClass);
-        serviceRegistry.registry(serviceClass.getCanonicalName(), new InetSocketAddress(host, port));
-        start();
+        this.serializer = CommonSerializer.getByCode(serializer);
+        scanServices();
     }
 
     @Override
     public void start() {
         ShutdownHook.getShutdownHook().addClearAllHook();
-        if (serializer == null) {
-            logger.error("未设置序列化器");
-            throw new RpcException(RpcError.SERVICE_NOT_FOUND);
-        }
         EventLoopGroup bossGroup = new NioEventLoopGroup();
         EventLoopGroup workerGroup = new NioEventLoopGroup();
 

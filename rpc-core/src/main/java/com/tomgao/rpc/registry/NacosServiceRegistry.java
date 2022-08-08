@@ -20,7 +20,7 @@ public class NacosServiceRegistry implements ServiceRegistry{
     private static final Logger logger = LoggerFactory.getLogger(NacosServiceRegistry.class);
 
     @Override
-    public void registry(String serviceName, InetSocketAddress inetSocketAddress) {
+    public void register(String serviceName, InetSocketAddress inetSocketAddress) {
         try {
             NacosUtil.registerService(serviceName, inetSocketAddress);
            } catch (NacosException e) {

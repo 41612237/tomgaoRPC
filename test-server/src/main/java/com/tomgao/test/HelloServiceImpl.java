@@ -1,10 +1,12 @@
 package com.tomgao.test;
 
+import com.tomgao.rpc.annotation.Service;
 import com.tomgao.rpc.api.HelloObject;
 import com.tomgao.rpc.api.HelloService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 
+@Service
 public class HelloServiceImpl implements HelloService {
 
     private static final Logger logger = LoggerFactory.getLogger(HelloServiceImpl.class);
@@ -12,6 +14,6 @@ public class HelloServiceImpl implements HelloService {
     @Override
     public String hello(HelloObject object) {
         logger.info("接收到消息:{}", object.getMessage());
-        return "本次处理来自netty";
+        return "Hello serviceImpl";
     }
 }

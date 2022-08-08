@@ -2,6 +2,8 @@ package com.tomgao.rpc.registry;
 
 import com.alibaba.nacos.api.exception.NacosException;
 import com.alibaba.nacos.api.naming.pojo.Instance;
+import com.tomgao.rpc.enumeration.RpcError;
+import com.tomgao.rpc.exception.RpcException;
 import com.tomgao.rpc.loadbalancer.LoadBalancer;
 import com.tomgao.rpc.loadbalancer.RandomLoadBalancer;
 import com.tomgao.rpc.util.NacosUtil;
@@ -32,6 +34,10 @@ public class NacosServiceDiscovery implements ServiceDiscovery{
     public InetSocketAddress lookupService(String serviceName) {
         try {
             List<Instance> instances = NacosUtil.getAllInstance(serviceName);
+            if (instances.size() == 0) {
+                logger.error("找不到对应的服务: " + serviceName);
+                throw new RpcException(RpcError.SERVICE_NOT_FOUND);
+            }
             Instance instance = loadBalancer.select(instances);
             return new InetSocketAddress(instance.getIp(), instance.getPort());
         } catch (NacosException e) {

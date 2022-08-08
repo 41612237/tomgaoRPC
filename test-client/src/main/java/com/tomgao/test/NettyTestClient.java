@@ -1,5 +1,6 @@
 package com.tomgao.test;
 
+import com.tomgao.rpc.api.ByeService;
 import com.tomgao.rpc.api.HelloObject;
 import com.tomgao.rpc.api.HelloService;
 import com.tomgao.rpc.serializer.CommonSerializer;
@@ -16,5 +17,7 @@ public class NettyTestClient {
         HelloObject object = new HelloObject(12, "this is a message from tomgao");
         String res = proxy.hello(object);
         System.out.println(res);
+        ByeService byeService = rpcClientProxy.getProxy(ByeService.class);
+        System.out.println(byeService.bye("rye"));
     }
 }

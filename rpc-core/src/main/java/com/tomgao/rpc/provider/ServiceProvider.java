@@ -10,7 +10,7 @@ public interface ServiceProvider {
      * @param service
      * @param <T>
      */
-    <T> void addServiceProvider(T service, Class<T> serviceClass);
+    <T> void addServiceProvider(T service, String serviceName);
 
     Object getServiceProvider(String serviceName);
 }
